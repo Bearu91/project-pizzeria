@@ -104,6 +104,16 @@
       thisApp.data = dataSource;
     },
 
+    initCart: function () {
+      const thisApp = this;
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+      thisApp.productList = document.querySelector(select.containerOf.menu);
+  
+      thisApp.productList.addEventListener('add-to-cart', function (event) {
+        app.cart.add(event.detail.product);
+      });
+    },
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
