@@ -53,10 +53,36 @@
   };
 
   class Product{
-    constructor(){
+    constructor(id,data){
       const thisProduct = this;
+      thisProduct.id = id;
+      thisProduct.data = data;
 
+      thisProduct.renderInMenu();
+      thisProduct.initAccordion();
       console.log('new Product:', thisProduct);
+    }
+
+    renderInMenu(){
+      const thisProduct = this;
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      const buttonTest = document.getElementById('button-test');
+      
+      buttonTest.addEventListener('click', function(){
+        console.log('clicked');
+      });
+
+
+
+
+
+
 
     }
   }
