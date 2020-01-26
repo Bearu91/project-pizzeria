@@ -93,10 +93,6 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
-    addToCart() {
-      const thisProduct = this;
-      app.cart.add(thisProduct);
-    }
     
   
     initAccordion() {
@@ -180,6 +176,27 @@
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
+    class AmountWidget {
+      constructor(element) {
+        const thisWidget = this;
+  
+        thisWidget.getElements(element);
+        thisWidget.value = settings.amountWidget.defaultValue;
+        thisWidget.setValue(thisWidget.input.value);
+        thisWidget.initActions();
+  
+        //console.log('AmountWidget:', AmountWidget);
+        //console.log('constructor arguments:', element);
+      }
+  
+      getElements(element) {
+        const thisWidget = this;
+  
+        thisWidget.element = element;
+        thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+        thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+        thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+      }
     setValue(value) {
       const thisWidget = this;
       const newValue = parseInt(value);
@@ -218,25 +235,11 @@
       });
       thisWidget.element.dispatchEvent(event);
     }
-  }
-
-
-
-
-    class AmountWidget {
-      constructor(element) {
-        const thisWidget = this;
-
-        thisWidget.getElements(element);
-        thisWidget.value = settings.amountWidget.defaultValue;
-        thisWidget.setValue(thisWidget.input.value);
-        thisWidget.initActions();
   
-        
-  
-        //console.log('AmountWidget:', AmountWidget);
-        //console.log('constructor arguments:', element);
-    }
+
+
+
+
   
     
   }
