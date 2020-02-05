@@ -265,7 +265,7 @@
 
       const newValue = parseInt(value);
 
-      /* TODO: Add validation */
+      /* TODO: Add validation s*/
 
       if (newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
 
