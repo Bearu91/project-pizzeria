@@ -306,17 +306,21 @@
       thisCart.products = [];
       thisCart.getElements(element);
       thisCart.initActions();
+      
     }
     getElements(element){
       const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
     }
     initActions() {
       const thisCart = this;
-      thisCart.input.addEventListener('click',thisCart.dom.toggleTrigger);
+      thisCart.input.addEventListener('click', function(){
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
       // tutaj  brak handlera ktory toogluje klase zapisan w ://
     }
     add(menuProduct){
@@ -343,11 +347,7 @@
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
   
-      thisApp.productList = document.querySelector(select.containerOf.menu);
-  
-      thisApp.productList.addEventListener('add-to-cart', function (event) {
-        app.cart.add(event.detail.product);
-      });
+      
     },
 
     init: function () {
