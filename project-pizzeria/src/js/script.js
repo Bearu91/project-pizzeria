@@ -97,7 +97,7 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      thisProduct.addToCart();
+  
     }
 
     renderInMenu() {
@@ -120,57 +120,32 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
-
-
     initAccordion() {
       const thisProduct = this;
-
       /* find the clickable trigger (the element that should react to clicking) */
-
       const clickableTrigger = thisProduct.element;
-
       /* START: click event listener to trigger */
-
       thisProduct.accordionTrigger.addEventListener('click', function(event) {
-
         /* prevent default action for event */
-
         event.preventDefault();
-
         /* toggle active class on element of thisProduct */
-
         clickableTrigger.classList.add(classNames.menuProduct.wrapperActive);
-
         /* find all active products */
-
         const activeProducts = document.querySelectorAll('.product');
-          
         /* START LOOP: for each active product */
         for (let activeProduct of activeProducts) {
-
           /* START: if the active product isn't the element of thisProduct */
-
           if (activeProduct != clickableTrigger) {
-
             /* remove class active for the active product */
-
             activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-
             /* END: if the active product isn't the element of thisProduct */
-            
           }
-
           /* END LOOP: for each active product */
-
         }
-
         /* END: click event listener to trigger */
-        
       });
-
     }
-
-
+    
     initOrderForm(){
       const thisProduct = this;
       thisProduct.form.addEventListener('submit', function (event){
@@ -185,7 +160,7 @@
       thisProduct.cartButton.addEventListener('click', function (event){
         event.preventDefault();
         thisProduct.processOrder();
-        
+        thisProduct.addToCart();
       });
     }
 
@@ -201,13 +176,14 @@
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           
           
-          //if (!thisProduct.params[paramId]) {//
-          //thisProduct.params[paramId] = {//
-          // label: paramId.label,//
-          //options: {},//
-          //};//
-          // }//
+          if (!thisProduct.params[paramId]) {
+            thisProduct.params[paramId] = {
+              label: paramId.label,
+              options: {},
+            };
+          }
           thisProduct.params[paramId].options[optionId] = option.label;
+          
           if (optionSelected && !option.default) {
             price = price + option.price;
           } else if (!optionSelected && option.default) {
@@ -232,6 +208,8 @@
     }
     addToCart(){
       const thisProduct = this;
+      thisProduct.name = thisProduct.data.name;
+      thisProduct.amount = thisProduct.amountWidget.value;
       app.cart.add(thisProduct);
     }
     initAmountWidget() {
@@ -312,20 +290,27 @@
       const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
     }
     initActions() {
       const thisCart = this;
-      thisCart.input.addEventListener('click', function(){
-        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+
+      thisCart.dom.toggleTrigger.addEventListener('click', function() {
+        if (thisCart.dom.wrapper.classList.contains(classNames.cart.wrapperActive)) {
+          thisCart.dom.wrapper.classList.remove(classNames.cart.wrapperActive);
+        } else {
+          thisCart.dom.wrapper.classList.add(classNames.cart.wrapperActive);
+        }
       });
-      // tutaj  brak handlera ktory toogluje klase zapisan w ://
     }
     add(menuProduct){
-    //const thisCart = this;
-      console.log('adding product', menuProduct);
+      const thisCart = this;
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
+
     }
   }
   const app = {
@@ -359,7 +344,7 @@
       console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
-      // thisApp.initCart();
+      thisApp.initCart();
     },
   };
 
