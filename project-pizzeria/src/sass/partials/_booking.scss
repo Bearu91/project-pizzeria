@@ -1,3 +1,4 @@
+
 #pages {
   > * {
     display: none;
@@ -32,6 +33,7 @@
   > .widget-amount {
     margin: ($base-size * 2) 0 0 0;
   }
+
 }
 
 .page__title {
@@ -53,6 +55,7 @@
     position: absolute;
     right: 0;
   }
+
 }
 
 .rangeSlider {
@@ -77,6 +80,7 @@
       top: -6px;
       background: $color-dark;
     }
+
   }
 
   &__fill {
@@ -99,27 +103,7 @@
   height: 320px;
   border: 12px solid $color-dark;
   margin: ($base-size * 4) auto;
-  background: linear-gradient(
-    to right,
-    #e9dfc4 0%,
-    #e9dfc4 1%,
-    #ede3c8 2%,
-    #ede3c8 24%,
-    #ebddc3 25%,
-    #e9dfc4 48%,
-    #ebddc3 49%,
-    #e6d8bd 52%,
-    #e6d8bd 53%,
-    #e9dbc0 54%,
-    #e6d8bd 55%,
-    #e6d8bd 56%,
-    #e9dbc0 57%,
-    #e6d8bd 58%,
-    #e6d8bd 73%,
-    #e9dbc0 74%,
-    #e9dbc0 98%,
-    #ebddc3 100%
-  );
+  background: linear-gradient(to right, #e9dfc4 0%, #e9dfc4 1%, #ede3c8 2%, #ede3c8 24%, #ebddc3 25%, #e9dfc4 48%, #ebddc3 49%, #e6d8bd 52%, #e6d8bd 53%, #e9dbc0 54%, #e6d8bd 55%, #e6d8bd 56%, #e9dbc0 57%, #e6d8bd 58%, #e6d8bd 73%, #e9dbc0 74%, #e9dbc0 98%, #ebddc3 100%);
   background-size: ($base-size * 3);
   background-repeat: repeat;
 
@@ -132,7 +116,7 @@
   .object {
     @extend .h3;
     background: #f7f1e3;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
   }
 
   .entry {
@@ -171,6 +155,7 @@
       &::after {
         border-radius: 50%;
       }
+
     }
 
     &.booked {
@@ -179,7 +164,7 @@
 
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         left: 0;
@@ -187,6 +172,7 @@
         background: $color-dark;
         opacity: 0.4;
       }
+
     }
   }
 
