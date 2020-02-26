@@ -1,8 +1,6 @@
 import BaseWidget from './BaseWidget.js';
 import utils from '../utils.js';
 import {select, settings} from '../settings.js';
-import flatpickr from "flatpickr";
-
 
 class DatePicker extends BaseWidget {
   constructor(wrapper) {
@@ -22,7 +20,7 @@ class DatePicker extends BaseWidget {
     //console.log('minDate', thisWidget.minDate);
     //console.log('maxDate', thisWidget.maxDate);
     
-    flatpickr (thisWidget.dom.input, {
+    window.flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
