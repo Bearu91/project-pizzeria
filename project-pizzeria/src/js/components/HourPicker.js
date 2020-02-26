@@ -17,10 +17,8 @@ class HourPicker extends BaseWidget {
 
   initPlugin() {
     const thisWidget = this;
-    /* eslint-disable */
-    rangeSlider.create(thisWidget.dom.input);
-    /* eslint-enable */
 
+    rangeSlider.create(thisWidget.dom.input);
     thisWidget.dom.input.addEventListener('input', function() {
       thisWidget.value = thisWidget.dom.input.value;
       //console.log('input', thisWidget.value);
