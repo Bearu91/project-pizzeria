@@ -169,6 +169,32 @@ class Booking{
     thisBooking.dom.email = thisBooking.dom.wrapper.querySelector(select.booking.email);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.bookTable);
+
+    thisBooking.dom.waterCheckbox = document.getElementById("water");
+    thisBooking.dom.breadCheckbox = document.getElementById("bread");
+  }
+  indicateCheckbox() {
+    const thisBooking = this;
+
+    const starters = ['water', 'bread'];
+
+    thisBooking.chosenStarters = [];
+
+    thisBooking.dom.waterCheckbox.addEventListener('click', function() {
+      if (thisBooking.dom.waterCheckbox.checked == true){
+        thisBooking.chosenStarters.push(starters[0]);
+      } else {
+        thisBooking.chosenStarter = null;
+      }
+    });
+
+    thisBooking.dom.breadCheckbox.addEventListener('click', function() {
+      if (thisBooking.dom.breadCheckbox.checked == true){
+        thisBooking.chosenStarters.push(starters[1]);
+      } else {
+        thisBooking.chosenStarter = null;
+      }
+    });
   }
   chooseTable(clickedTable){
     const thisBooking = this;

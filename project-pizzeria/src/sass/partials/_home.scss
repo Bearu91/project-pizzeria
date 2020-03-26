@@ -1,0 +1,223 @@
+.home-wrapper {
+    margin: 42px auto;
+    padding: 72px 48px;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: $radius;
+  }
+  
+  .home-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .home-buttons {
+    flex-basis: 49.5%;
+    position: relative;
+    overflow: hidden;
+    font-weight: 100;
+    height: 118px;
+    width: auto;
+    border-radius: $radius;
+    font-weight: $font-bold;
+    font-family: $font-header;
+    font-size: 18px;
+    color: $color-light;
+    cursor: pointer;
+    color: $color-light;
+  
+    a {
+      text-decoration: none;
+      font-size: 24px;
+      color: $color-light;
+      top: 33%;
+      right: 26%;
+      position: absolute;
+      transition: 0.5s;
+      text-align: center;
+    }
+  }
+  
+  .hidden-text {
+    font-size: 15px;
+    font-family: $font-text;
+    transition: 0.5s;
+    opacity: 0;
+    top: 70%;
+    right: 30%;
+    position: absolute;
+  }
+  
+  .home-buttons:hover {
+    a {
+      top: 10%;
+    }
+  
+    p {
+      top: 55%;
+    }
+  
+    .hidden-text {
+      opacity: 1;
+    }
+  }
+  
+  .home-image img {
+    width: 100%;
+    height: 118px;
+    object-fit: cover;
+  }
+  
+  .open-hours {
+    position: relative;
+    flex-basis: 100%;
+    margin: 8px 0;
+    border-radius: $radius;
+    background-color: $color-main;
+    color: $color-light;
+    text-align: center;
+  
+    h1 {
+      margin: 24px 0 0px 0;
+      font-size: 28px;
+      font-family: $font-header;
+    }
+  
+    p {
+      margin: 0 0 24px 0;
+    }
+  }
+  
+  .carousel-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .home-carousel {
+    margin: 0 -35px;
+    flex-direction: row;
+    position: relative;
+    display: flex; 
+  }
+  
+  .carousel-img {
+    height: 195px;
+    width: 195px;
+  
+    img {
+      object-fit: cover;
+      height: 192px;
+      width: 192px;
+      border-radius: $radius;
+    }
+  }
+  
+  .carousel-opinion {
+    position: relative;
+    text-align: left;
+    margin-left: 29px;
+    width: 100%;
+  }
+  
+  .opinion-title {
+    font-weight: bold;
+  }
+  
+  .opinion-author {
+    font-style: italic;
+  }
+  
+  .carousel-container {
+    margin: 102px 39px;
+  }
+  
+  .slide {
+    position: absolute;
+    background: white;
+    opacity: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .slide.active {
+    opacity: 1;
+    transition-duration: 2s;
+  }
+  
+  .carousel-dot {
+    border-radius: 50%;
+    border: 0;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    margin: 0 6px;
+    cursor: pointer;
+  }
+  
+  .carousel-dot.active {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .home-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .gallery-img {
+    flex: 0 0 31%;
+    margin: 6px;
+    object-fit: cover;
+    position: relative;
+    display: inline-block;
+    height: 190px;
+  
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: $radius;
+    }
+  }
+  
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: $radius;
+  
+    i {
+      font-size: 25px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+  
+  .gallery-img:hover .image-overlay {
+    opacity: 1;
+  }
+  
+  .gallery-img i:hover {
+    color: $color-main;
+    cursor: pointer;
+    opacity: 1;
+  }
+  
+  .footer {
+    margin: 13px 0 0 7px;
+  
+    a {
+      color: $color-main;
+    }
+  }
