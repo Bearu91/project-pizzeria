@@ -64,6 +64,8 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     reserve: '.order-confirmation',
+    phone: '.input-number',
+    email: '.input-email',
   },
   nav: {
     links: '.main-nav a',

@@ -5,71 +5,44 @@ import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
 
 class Booking {
-  constructor(bookingContainer) {
+  constructor(element) {
     const thisBooking = this;
 
-    thisBooking.render(bookingContainer);
+    thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.initActions();
     thisBooking.indicateCheckbox();
   }
 
-  render(bookingContainer) {
+  render(element) {
     const thisBooking = this;
 
     const generatedHTML = templates.bookingWidget();
 
     thisBooking.dom = {};
-    thisBooking.dom.wrapper = bookingContainer;
+    thisBooking.dom.wrapper = element;
     thisBooking.dom.wrapper = utils.createDOMFromHTML(generatedHTML);
     
     thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
-    bookingContainer.appendChild(thisBooking.dom.wrapper);
+    element.appendChild(thisBooking.dom.wrapper);
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
 
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.email = thisBooking.dom.wrapper.querySelector(select.booking.email);
 
-    thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.bookTable);
+    thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.reserve);
 
     thisBooking.dom.waterCheckbox = document.getElementById('water');
     thisBooking.dom.breadCheckbox = document.getElementById('bread');
     
   }
 
-  initWidgets () {
-    const thisBooking = this;
-
-    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
-    thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
-    thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
-
-    thisBooking.dom.wrapper.addEventListener('updated', function() {
-      thisBooking.updateDOM();
-    }); 
-
-    thisBooking.dom.datePicker.addEventListener('updated', function() {
-      thisBooking.clearTable();
-      thisBooking.date = thisBooking.datePicker.value;
-      thisBooking.colorRangeSlider();
-    });
-    
-    thisBooking.dom.hourPicker.addEventListener('updated', function() {
-      thisBooking.clearTable();
-    });
-
-    thisBooking.dom.submit.addEventListener('click', function() {
-      event.preventDefault();
-      thisBooking.sendBooking();
-    });
   
-  }
 
   getData() {
     const thisBooking = this;
@@ -213,24 +186,19 @@ class Booking {
   indicateCheckbox() {
     const thisBooking = this;
 
-    const starters = ['water', 'bread'];
+    thisBooking.chosenStarters = {
+      water: false,
+      bread: false,
 
-    thisBooking.chosenStarters = [];
+    };
 
     thisBooking.dom.waterCheckbox.addEventListener('click', function() {
-      if (thisBooking.dom.waterCheckbox.checked == true){
-        thisBooking.chosenStarters.push(starters[0]);
-      } else {
-        thisBooking.chosenStarter = null;
-      }
+      thisBooking.chosenStarters.water == thisBooking.waterCheckbox.checked == true;
     });
+     
 
     thisBooking.dom.breadCheckbox.addEventListener('click', function() {
-      if (thisBooking.dom.breadCheckbox.checked == true){
-        thisBooking.chosenStarters.push(starters[1]);
-      } else {
-        thisBooking.chosenStarter = null;
-      }
+      thisBooking.chosenStarters.bread == thisBooking.waterCheckbox.checked == true;
     });
   } 
 
@@ -273,16 +241,17 @@ class Booking {
     const thisBooking = this;
 
     const url = settings.db.url + '/' + settings.db.booking;
-
+    
     const payload = {
       date: thisBooking.datePicker.correctValue,
       hour: thisBooking.hourPicker.correctValue,
       duration: thisBooking.hoursAmount.value,
       ppl: thisBooking.peopleAmount.value,
       table: parseInt(thisBooking.tableNumber),
-      phone: thisBooking.dom.phone.value,
-      email: thisBooking.dom.email.value,
-    };console.log('payload',payload);
+      phone: thisBooking.phone,
+      email: thisBooking.email,
+      starters: thisBooking.chosenStarters,
+    };
 
     const options = {
       method: 'POST',
@@ -330,6 +299,33 @@ class Booking {
     } else { 
       return 'green'; }                                                                            
   }
-}
 
+  initWidgets () {
+    const thisBooking = this;
+
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
+    thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+
+    thisBooking.dom.wrapper.addEventListener('updated', function() {
+      thisBooking.updateDOM();
+    }); 
+
+    thisBooking.dom.datePicker.addEventListener('updated', function() {
+      thisBooking.clearTable();
+      thisBooking.date = thisBooking.datePicker.value;
+      thisBooking.colorRangeSlider();
+    });
+  
+    thisBooking.dom.hourPicker.addEventListener('updated', function() {
+      thisBooking.clearTable();
+    });
+    thisBooking.dom.submit.addEventListener('click', function(event) {
+      event.preventDefault();
+      thisBooking.sendBooking();
+    });
+
+  }
+}
 export default Booking;
