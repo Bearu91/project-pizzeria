@@ -193,12 +193,12 @@ class Booking {
     };
 
     thisBooking.dom.waterCheckbox.addEventListener('click', function() {
-      thisBooking.chosenStarters.water == thisBooking.waterCheckbox.checked == true;
+      thisBooking.chosenStarters.water = thisBooking.dom.waterCheckbox.checked;
     });
      
 
     thisBooking.dom.breadCheckbox.addEventListener('click', function() {
-      thisBooking.chosenStarters.bread == thisBooking.waterCheckbox.checked == true;
+      thisBooking.chosenStarters.bread = thisBooking.dom.waterCheckbox.checked;
     });
   } 
 

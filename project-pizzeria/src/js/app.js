@@ -9,6 +9,7 @@ const app = {
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.boxLinks = document.querySelectorAll(select.nav.boxes);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -23,7 +24,8 @@ const app = {
 
     thisApp.activatePage(pageMatchingHash);
 
-    for (let link of thisApp.navLinks) {
+    const navs = [...thisApp.navLinks, ...thisApp.boxLinks];
+    for (let link of navs) {
       link.addEventListener('click', function (event) {
         const clickedElement = this;
         event.preventDefault();
